@@ -4,9 +4,11 @@ import CustomSelect from '../CustomComponents/CustomSelect'
 import OrientationSelect from '@/components/OrientationSelect'
 import SizeSelect from '@/components/SizeSelect'
 import ColorSelect from '@/components/ColorSelect'
+import Modal from '../Modal'
 
 export default function SearchBar({ handleSubmit, error, setQuality }) {
   const [type, setType] = useState('photo')
+  const [modalOpen, setModalOpen] = useState(false)
   return (
     <header>
       <form onSubmit={handleSubmit} className='flex py-10 flex-col justify-center items-center'>
@@ -32,15 +34,24 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
             autoComplete='off'
             name='query'
             placeholder="EX: 'cats' or 'teacher'"
-            className='w-5/6 sm:w-3/6 xl:w-[400px] bg-green-50  border-2 focus:outline-none h-10 border-green-950 rounded-md p-2 hover:border-green-800 focus:border-green-800 transition-colors divide-x-reverse'
+            className={` ${
+              error ? 'border-red-600 hover:border-red-800 focus:border-red-600' : ''
+            } w-5/6 sm:w-3/6 xl:w-[400px] bg-green-50  border-2 focus:outline-none h-10 border-green-950 rounded-md p-2 hover:border-green-800 focus:border-green-800 transition-colors divide-x-reverse`}
           ></input>
-
-          <button
-            className='w-[100px] border-2 px-3 py-1 h-10 mt-auto rounded-lg border-green-950 bg-emerald-800 text-white hover:bg-emerald-600 transition-colors active:bg-emerald-900'
-            type='submit'
-          >
-            Search
-          </button>
+          <div className='flex items-center min-w-[120px] justify-between flex-col sm:flex-row'>
+            <button
+              className='w-[100px] border-2 px-3 py-1 h-10 mt-auto rounded-lg border-green-950 bg-emerald-800 text-white hover:bg-emerald-600 transition-colors active:bg-emerald-900'
+              type='submit'
+            >
+              Search
+            </button>
+            <span
+              onClick={() => setModalOpen(true)}
+              className='leading-5 w-5 h-5 rounded-full bg-emerald-800 text-white text-center sm:ml-2 mt-2 hover:cursor-pointer'
+            >
+              ?
+            </span>
+          </div>
         </div>
 
         <div className='flex gap-6 w-full justify-center mt-10 flex-wrap'>
@@ -65,6 +76,8 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
           <p className='text-orange-900 w-full text-center'>"{error}"</p>
         </div>
       )}
+
+      {modalOpen && <Modal close={() => setModalOpen(false)}></Modal>}
     </header>
   )
 }
