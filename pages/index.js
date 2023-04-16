@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import SearchBar from '@/components/SearchBar'
+import Loader from '@/components/Loader'
+
+import { useSearch } from '@/hooks/useSearch'
 
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
-import { useSearch } from '@/hooks/useSearch'
-import Loader from '@/components/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
           dataLength={photos?.length || 0}
           endMessage={
             data.total_results !== 0 ? (
-              <p className='w-full text-center'>you have seen it all</p>
+              <p className='w-full text-lg text-center mt-10 mb-7'>you have seen it all</p>
             ) : null
           }
           scrollThreshold='2000px'
@@ -46,8 +47,9 @@ export default function Home() {
             columnsCountBreakPoints={{ 0: 1, 350: 2, 700: 3, 900: 4, 1100: 5, 1300: 6, 1500: 7 }}
           >
             <Masonry gutter='7px'>
-              {photos?.length !== 0
-                ? photos.map((photo, i) => {
+              {
+                photos?.length !== 0 &&
+                  photos.map((photo, i) => {
                     return (
                       <picture key={photo.id}>
                         <Image
@@ -65,7 +67,8 @@ export default function Home() {
                       </picture>
                     )
                   })
-                : loading === true && setLoading(false)}
+                // : loading === true && setLoading(false)
+              }
             </Masonry>
           </ResponsiveMasonry>
         </InfiniteScroll>

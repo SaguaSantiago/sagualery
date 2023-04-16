@@ -18,6 +18,7 @@ export const useSearch = () => {
 
     if (parameters.query === '') {
       setError('Is required to enter a parameter for the search')
+      setLoading(false)
       return
     }
 
@@ -25,29 +26,30 @@ export const useSearch = () => {
       .then((res) => {
         setData(res)
         setPhotos(res.photos)
+        setError('')
       })
       .catch((err) => setError(err))
   }
 
   const handleInfiniteScroll = () => {
-    console.log('ejecutando')
     getNextPhotos({ url: data.next_page })
       .then((res) => {
         setData({ ...data, ...res })
         setPhotos([...photos, ...res.photos])
+        setError('')
       })
       .catch((err) => setError(err))
   }
 
   return {
     handleSubmit,
-    photos,
     handleInfiniteScroll,
+    setLoading,
+    setQuality,
+    photos,
     error,
     loading,
-    setLoading,
     data,
     quality,
-    setQuality,
   }
 }
