@@ -5,9 +5,6 @@ import OrientationSelect from '@/components/OrientationSelect'
 import SizeSelect from '@/components/SizeSelect'
 import ColorSelect from '@/components/ColorSelect'
 import Modal from '../Modal'
-import spainImage from 'public/static/spain.png'
-import usaImage from 'public/static/USA.png'
-import Image from 'next/image'
 
 export default function SearchBar({ handleSubmit, error, setQuality }) {
   const [type, setType] = useState('photo')
