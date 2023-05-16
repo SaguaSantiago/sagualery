@@ -11,7 +11,7 @@ export const useSearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
-    const names = ['query', 'orientation', 'url', 'color', 'size']
+    const names = ['query', 'orientation', 'url', 'color', 'size', 'lang']
     const data = new FormData(e.target)
     const parametersArr = names.map((name) => [name, data.get(name)])
     const parameters = Object.fromEntries(parametersArr)

@@ -5,15 +5,25 @@ import OrientationSelect from '@/components/OrientationSelect'
 import SizeSelect from '@/components/SizeSelect'
 import ColorSelect from '@/components/ColorSelect'
 import Modal from '../Modal'
+import spainImage from 'public/static/spain.png'
+import usaImage from 'public/static/USA.png'
+import Image from 'next/image'
 
 export default function SearchBar({ handleSubmit, error, setQuality }) {
   const [type, setType] = useState('photo')
+  const [lang, setLang] = useState('en-US')
   const [modalOpen, setModalOpen] = useState(false)
   return (
     <header>
       <form onSubmit={handleSubmit} className='flex py-10 flex-col justify-center items-center'>
         <h1 className='text-green-800 text-4xl font-semibold'>SaGualery</h1>
         <div className='w-full flex mt-8 gap-2 gap-y-3 items-center justify-center flex-wrap'>
+          <CustomSelect onChange={(e) => setLang(e.target.value)} defultValue='en-US' name='lang'>
+            <option value=''>Lang</option>
+            <option value='en-US'>ENG</option>
+            <option value='es-ES'>ESP</option>
+          </CustomSelect>
+
           <CustomSelect
             onChange={() => (type === 'photo' ? setType('video') : setType('photo'))}
             name='url'
