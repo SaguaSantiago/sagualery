@@ -5,6 +5,7 @@ import OrientationSelect from '@/components/OrientationSelect'
 import SizeSelect from '@/components/SizeSelect'
 import ColorSelect from '@/components/ColorSelect'
 import Modal from '../Modal'
+import Image from 'next/image'
 
 export default function SearchBar({ handleSubmit, error, setQuality }) {
   const [type, setType] = useState('photo')
@@ -13,7 +14,13 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
   return (
     <header>
       <form onSubmit={handleSubmit} className='flex py-10 flex-col justify-center items-center'>
-        <h1 className='text-green-800 text-4xl font-semibold'>SaGualery</h1>
+        <img
+          src='/static/Logo.png'
+          className='md:absolute top-4 right-3 md:w-[80px] md:h-[80px] lg:right-10'
+          width='120'
+          height='120'
+        />
+        <h1 className=' text-green-800 text-2xl mt-[-15px] sm:text-4xl font-semibold'>SaGualery</h1>
         <div className='w-full flex mt-8 gap-2 gap-y-3 items-center justify-center flex-wrap'>
           <CustomSelect onChange={(e) => setLang(e.target.value)} defultValue='en-US' name='lang'>
             <option value=''>Lang</option>
