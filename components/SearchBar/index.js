@@ -14,35 +14,9 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
   return (
     <header>
       <form onSubmit={handleSubmit} className='flex py-10 flex-col justify-center items-center'>
-        <img
-          src='/static/Logo.png'
-          className='md:absolute top-4 right-3 md:w-[80px] md:h-[80px] lg:right-10'
-          width='120'
-          height='120'
-        />
-        <h1 className=' text-green-800 text-2xl mt-[-15px] sm:text-4xl font-semibold'>SaGualery</h1>
+        <img src='/static/Logo.png' width='120' height='120' />
+        <h1 className=' text-green-800 text-3xl mt-[-15px] sm:text-4xl font-semibold'>SaGualery</h1>
         <div className='w-full flex mt-8 gap-2 gap-y-3 items-center justify-center flex-wrap'>
-          <CustomSelect onChange={(e) => setLang(e.target.value)} defultValue='en-US' name='lang'>
-            <option value=''>Lang</option>
-            <option value='en-US'>ENG</option>
-            <option value='es-ES'>ESP</option>
-          </CustomSelect>
-
-          <CustomSelect
-            onChange={() => (type === 'photo' ? setType('video') : setType('photo'))}
-            name='url'
-            className='hover:cursor-pointer h-8 px-2 mr-2'
-          >
-            <option value={'https://api.pexels.com/v1/search?'} className=''>
-              Photos
-            </option>
-            {/* 
-            TODO: add video option and request
-            <option value={'https://api.pexels.com/videos/search?'} className=''>
-              videos
-            </option> 
-            */}
-          </CustomSelect>
           <input
             type='text'
             autoComplete='off'
@@ -68,7 +42,7 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
           </div>
         </div>
 
-        <div className='flex gap-6 w-full justify-center mt-10 flex-wrap'>
+        <div className='flex gap-6 gap-y-3 w-full justify-center mt-10 flex-wrap max-w-[500px]'>
           <OrientationSelect name='orientation' />
           <SizeSelect
             onChange={(e) => {
@@ -82,6 +56,27 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
             name='size'
           />
           <ColorSelect disabled={type !== 'photo'} name='color' />
+          <CustomSelect onChange={(e) => setLang(e.target.value)} defultValue='en-US' name='lang'>
+            <option value=''>Lang</option>
+            <option value='en-US'>ENG</option>
+            <option value='es-ES'>ESP</option>
+          </CustomSelect>
+
+          <CustomSelect
+            onChange={() => (type === 'photo' ? setType('video') : setType('photo'))}
+            name='url'
+            className='hover:cursor-pointer h-8 px-2 mr-2'
+          >
+            <option value={'https://api.pexels.com/v1/search?'} className=''>
+              Photos
+            </option>
+            {/* 
+            TODO: add video option and request
+            <option value={'https://api.pexels.com/videos/search?'} className=''>
+              videos
+            </option> 
+            */}
+          </CustomSelect>
         </div>
       </form>
       {error && (
