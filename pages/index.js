@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import SearchBar from '@/components/SearchBar'
 import Loader from '@/components/Loader'
 
@@ -8,17 +7,8 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 export default function Home() {
-  const {
-    handleSubmit,
-    photos,
-    error,
-    loading,
-    setLoading,
-    handleInfiniteScroll,
-    data,
-    quality,
-    setQuality,
-  } = useSearch()
+  const { handleSubmit, photos, error, loading, handleInfiniteScroll, data, quality, setQuality } =
+    useSearch()
 
   return (
     <>
@@ -52,12 +42,7 @@ export default function Home() {
                   photos.map((photo, i) => {
                     return (
                       <picture key={photo.id}>
-                        <Image
-                          onLoadingComplete={() => {
-                            if (i === photos.length - 1) {
-                              setLoading(false)
-                            }
-                          }}
+                        <img
                           loading='eager'
                           width='300'
                           height='400'

@@ -29,6 +29,7 @@ export const useSearch = () => {
         setError('')
       })
       .catch((err) => setError(err))
+      .finally(() => setLoading(false))
   }
 
   const handleInfiniteScroll = () => {
@@ -39,6 +40,7 @@ export const useSearch = () => {
         setError('')
       })
       .catch((err) => setError(err))
+      .finally(() => setLoading(false))
   }
 
   return {
