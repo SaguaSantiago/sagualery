@@ -9,7 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 export default function Home() {
   const { handleSubmit, photos, error, loading, handleInfiniteScroll, data, quality, setQuality } =
     useSearch()
-
+  console.log(photos)
   return (
     <>
       <SearchBar
@@ -24,12 +24,16 @@ export default function Home() {
       <main className={'px-5 w-full max-w-[1700px] relative left-1/2 -translate-x-1/2'}>
         <InfiniteScroll
           next={handleInfiniteScroll}
-          hasMore={data.total_results !== photos?.length}
+          hasMore={data.total_results !== photos?.length && !error}
           dataLength={photos?.length || 0}
           endMessage={
-            data.total_results !== 0 ? (
+            data.total_results !== 0 && !error ? (
               <p className='w-full text-lg text-center mt-10 mb-7'>you have seen it all</p>
-            ) : null
+            ) : error ? (
+              <></>
+            ) : (
+              <p className='w-full text-lg text-center mt-10 mb-7'>No results found</p>
+            )
           }
           scrollThreshold='2000px'
         >
@@ -38,7 +42,9 @@ export default function Home() {
           >
             <Masonry gutter='7px'>
               {
-                photos?.length !== 0 &&
+                !error &&
+                  photos?.length !== 0 &&
+                  photos &&
                   photos.map((photo, i) => {
                     return (
                       <picture key={photo.id}>
@@ -57,7 +63,6 @@ export default function Home() {
             </Masonry>
           </ResponsiveMasonry>
         </InfiniteScroll>
-        {data.total_results === 0 && <p className='text-center w-full'>0 results found</p>}
       </main>
     </>
   )

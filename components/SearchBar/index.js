@@ -66,7 +66,7 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
             name='url'
             className='hover:cursor-pointer h-8 px-2 mr-2'
           >
-            <option value={'https://api.pexels.com/v1/search?'} className=''>
+            <option value={'https://api.pexels.com/v1/search'} className=''>
               Photos
             </option>
             {/* 
@@ -79,9 +79,9 @@ export default function SearchBar({ handleSubmit, error, setQuality }) {
         </div>
       </form>
       {error && (
-        <div className='w-full max-w-3xl block mx-auto min-h-[64px] bg-red-300 mb-16 rounded'>
+        <div className='w-full max-w-3xl block mx-auto min-h-[64px] bg-red-300 mb-16 rounded py-2'>
           <p className='text-orange-900 w-full text-center'>An error occurred while searching:</p>
-          <p className='text-orange-900 w-full text-center'>"{error}"</p>
+          <p className='text-orange-900 w-full text-center font-bold'>{error}</p>
         </div>
       )}
 

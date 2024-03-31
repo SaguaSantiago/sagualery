@@ -20,6 +20,10 @@ export const useSearch = () => {
       setError('Is required to enter a parameter for the search')
       setLoading(false)
       return
+    } else if (!/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9\s]+$/.test(parameters.query)) {
+      setError('Invalid characters in the search entered')
+      setLoading(false)
+      return
     }
 
     getSearchedPhotos(parameters)
@@ -28,7 +32,9 @@ export const useSearch = () => {
         setPhotos(res.photos)
         setError('')
       })
-      .catch((err) => setError(err))
+      .catch((err) => {
+        setError(err.message)
+      })
       .finally(() => setLoading(false))
   }
 
